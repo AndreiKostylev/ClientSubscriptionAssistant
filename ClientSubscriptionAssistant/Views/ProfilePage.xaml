@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ClientSubscriptionAssistant.Views.ProfilePage"
+             Title="ProfilePage">
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="20">
+
+         
+            <Frame BackgroundColor="White"
+               CornerRadius="10"
+               Padding="15"
+               HasShadow="True">
+
+                <VerticalStackLayout Spacing="10">
+                    <Label x:Name="UserNameLabel"
+                       Text="Имя пользователя"
+                       FontSize="18"
+                       FontAttributes="Bold"/>
+
+                    <Label x:Name="UserEmailLabel"
+                       Text="email@example.com"
+                       FontSize="14"
+                       TextColor="Gray"/>
+                </VerticalStackLayout>
+
+            </Frame>
+
+           
+            <Frame BackgroundColor="White"
+               CornerRadius="10"
+               Padding="15"
+               HasShadow="True">
+
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="Статистика"
+                       FontSize="16"
+                       FontAttributes="Bold"/>
+
+                    <HorizontalStackLayout Spacing="20">
+                        <VerticalStackLayout Spacing="5">
+                            <Label x:Name="TotalSubscriptionsLabel"
+                               Text="0"
+                               FontSize="20"
+                               FontAttributes="Bold"
+                               HorizontalOptions="Center"/>
+                            <Label Text="Подписок"
+                               FontSize="12"
+                               HorizontalOptions="Center"/>
+                        </VerticalStackLayout>
+
+                        <VerticalStackLayout Spacing="5">
+                            <Label x:Name="MonthlyCostLabel"
+                               Text="0 ₽"
+                               FontSize="20"
+                               FontAttributes="Bold"
+                               HorizontalOptions="Center"/>
+                            <Label Text="В месяц"
+                               FontSize="12"
+                               HorizontalOptions="Center"/>
+                        </VerticalStackLayout>
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+
+            </Frame>
+
+       
+            <VerticalStackLayout Spacing="10">
+                <Button Text="Редактировать профиль"
+                    BackgroundColor="LightGray"
+                    TextColor="Black"
+                    CornerRadius="8"
+                    Padding="15,10"/>
+
+                <Button Text="Сменить пароль"
+                    BackgroundColor="LightGray"
+                    TextColor="Black"
+                    CornerRadius="8"
+                    Padding="15,10"/>
+
+                <Button x:Name="LogoutButton"
+                    Text="Выйти"
+                    BackgroundColor="Red"
+                    TextColor="White"
+                    CornerRadius="8"
+                    Padding="15,10"
+                    />
+            </VerticalStackLayout>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

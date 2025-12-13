@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ClientSubscriptionAssistant.Views.LoginPage"
+             Title="LoginPage">
+    <ScrollView>
+        <VerticalStackLayout Spacing="20" Padding="30">
+
+            
+            <VerticalStackLayout Spacing="10" HorizontalOptions="Center">
+                <Label Text="Subscription Assistant"
+                       FontSize="28"
+                       FontAttributes="Bold"
+                       TextColor="#007ACC"/>
+                <Label Text="Управление подписками"
+                       FontSize="14"
+                       TextColor="Gray"/>
+            </VerticalStackLayout>
+
+            
+            <Frame BackgroundColor="White"
+                   CornerRadius="12"
+                   Padding="20"
+                   HasShadow="True">
+
+                <VerticalStackLayout Spacing="15">
+
+                    <Label Text="Вход в систему"
+                           FontSize="20"
+                           FontAttributes="Bold"/>
+
+               
+                    <VerticalStackLayout Spacing="5">
+                        <Label Text="Email или логин" FontSize="14"/>
+                        <Entry x:Name="EmailEntry"
+                               Placeholder="ivanov@example.com"
+                               Keyboard="Email"/>
+                    </VerticalStackLayout>
+
+                 
+                    <VerticalStackLayout Spacing="5">
+                        <Label Text="Пароль" FontSize="14"/>
+                        <Entry x:Name="PasswordEntry"
+                               Placeholder="Введите пароль"
+                               IsPassword="True"/>
+                    </VerticalStackLayout>
+
+              
+                    <HorizontalStackLayout Spacing="10">
+                        <CheckBox x:Name="RememberCheckbox"/>
+                        <Label Text="Запомнить меня" 
+                               FontSize="14"
+                               VerticalOptions="Center"/>
+                    </HorizontalStackLayout>
+
+            
+                    <Button x:Name="LoginButton"
+                            Text="Войти"
+                            BackgroundColor="#007ACC"
+                            TextColor="White"
+                            FontSize="16"
+                            CornerRadius="10"
+                            Padding="20,12"
+                            Clicked="OnLoginClicked"/>
+
+                  
+                    <Label x:Name="ErrorLabel"
+                           TextColor="Red"
+                           IsVisible="False"/>
+
+                </VerticalStackLayout>
+
+            </Frame>
+
+          
+            <Frame BackgroundColor="Transparent"
+                   BorderColor="Transparent"
+                   Padding="0">
+
+                <HorizontalStackLayout HorizontalOptions="Center" Spacing="5">
+                    <Label Text="Нет аккаунта?" FontSize="14"/>
+                    <Button Text="Зарегистрироваться"
+                            TextColor="#007ACC"
+                            BackgroundColor="Transparent"
+                            FontSize="14"
+                            Clicked="OnRegisterClicked"/>
+                </HorizontalStackLayout>
+
+            </Frame>
+
+           
+            <ActivityIndicator x:Name="LoadingIndicator"
+                               Color="#007ACC"
+                               IsRunning="False"
+                               HorizontalOptions="Center"/>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

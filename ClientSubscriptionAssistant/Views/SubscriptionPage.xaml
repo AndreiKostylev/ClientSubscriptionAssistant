@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ClientSubscriptionAssistant.Views.SubscriptionPage"
+             Title="SubscriptionPage">
+    <Grid RowDefinitions="auto,*,auto">
+
+
+        <Frame Grid.Row="0"
+               BackgroundColor="#007ACC"
+               CornerRadius="0"
+               Padding="20,15"
+               HasShadow="True">
+
+            <HorizontalStackLayout>
+                <Label Text="Мои подписки"
+                       FontSize="20"
+                       FontAttributes="Bold"
+                       TextColor="White"/>
+
+                <Button Text="➕"
+                        TextColor="White"
+                        BackgroundColor="Transparent"
+                        FontSize="24"
+                        HorizontalOptions="EndAndExpand"
+                        />
+            </HorizontalStackLayout>
+
+        </Frame>
+
+    
+        <CollectionView Grid.Row="1"
+                        x:Name="SubscriptionsList"
+                        Margin="10"
+                        SelectionMode="Single"
+                        >
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame BackgroundColor="White"
+                           CornerRadius="10"
+                           Padding="15"
+                           Margin="0,0,0,10"
+                           HasShadow="True">
+
+                        <Grid ColumnDefinitions="auto,*,auto" ColumnSpacing="15">
+
+                          
+                            <Frame Grid.Column="0"
+                                   WidthRequest="50"
+                                   HeightRequest="50"
+                                   CornerRadius="8"
+                                   BackgroundColor="#007ACC"
+                                   Padding="0">
+                                <Label Text="📊"
+                                       FontSize="20"
+                                       HorizontalOptions="Center"
+                                       VerticalOptions="Center"/>
+                            </Frame>
+
+                          
+                            <VerticalStackLayout Grid.Column="1" Spacing="5">
+                                <Label Text="{Binding Name}"
+                                       FontSize="16"
+                                       FontAttributes="Bold"/>
+
+                                <Label Text="{Binding ServiceName}"
+                                       FontSize="14"
+                                       TextColor="Gray"/>
+
+                                <Label Text="{Binding NextPaymentDate, StringFormat='Следующая оплата: {0:dd.MM.yyyy}'}"
+                                       FontSize="12"
+                                       TextColor="Gray"/>
+                            </VerticalStackLayout>
+
+                      
+                            <VerticalStackLayout Grid.Column="2" Spacing="5">
+                                <Label Text="{Binding Price, StringFormat='{0:C}'}"
+                                       FontSize="16"
+                                       FontAttributes="Bold"
+                                       TextColor="#007ACC"/>
+
+                                <Frame BackgroundColor="{Binding StatusColor}"
+                                       CornerRadius="5"
+                                       Padding="8,4">
+                                    <Label Text="{Binding Status}"
+                                           FontSize="10"
+                                           TextColor="White"/>
+                                </Frame>
+                            </VerticalStackLayout>
+
+                        </Grid>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+
+         
+            <CollectionView.EmptyView>
+                <VerticalStackLayout HorizontalOptions="Center" 
+                                     VerticalOptions="Center"
+                                     Padding="40">
+                    <Label Text="📭" 
+                           FontSize="40"
+                           HorizontalOptions="Center"/>
+                    <Label Text="Нет подписок" 
+                           FontSize="18"
+                           FontAttributes="Bold"
+                           HorizontalOptions="Center"/>
+                    <Label Text="Добавьте свою первую подписку" 
+                           FontSize="14"
+                           TextColor="Gray"
+                           HorizontalOptions="Center"/>
+                    <Button Text="➕ Добавить подписку"
+                            BackgroundColor="#007ACC"
+                            TextColor="White"
+                            FontSize="16"
+                            CornerRadius="10"
+                            Padding="20,10"
+                            Margin="0,20"
+                            />
+                </VerticalStackLayout>
+            </CollectionView.EmptyView>
+
+        </CollectionView>
+
+
+        <Frame Grid.Row="2"
+               BackgroundColor="White"
+               CornerRadius="10"
+               Margin="10,0,10,10"
+               Padding="15"
+               HasShadow="True">
+
+            <HorizontalStackLayout Spacing="10">
+                <Button Text="Все"
+                        BackgroundColor="#007ACC"
+                        TextColor="White"
+                        CornerRadius="8"
+                        Padding="15,8"/>
+
+                <Button Text="Активные"
+                        BackgroundColor="#E0E0E0"
+                        TextColor="Black"
+                        CornerRadius="8"
+                        Padding="15,8"/>
+
+                <Button Text="Неактивные"
+                        BackgroundColor="#E0E0E0"
+                        TextColor="Black"
+                        CornerRadius="8"
+                        Padding="15,8"/>
+            </HorizontalStackLayout>
+
+        </Frame>
+
+    
+        <ActivityIndicator Grid.RowSpan="3"
+                           x:Name="LoadingIndicator"
+                           Color="#007ACC"
+                           IsRunning="False"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center"/>
+
+    </Grid>
+</ContentPage>

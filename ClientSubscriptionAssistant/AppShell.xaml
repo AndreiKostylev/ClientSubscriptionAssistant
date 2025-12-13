@@ -4,12 +4,42 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:ClientSubscriptionAssistant"
-    Shell.FlyoutBehavior="Disabled"
+     xmlns:Views="clr-namespace:ClientSubscriptionAssistant.Views"
+    Shell.FlyoutBehavior="Flyout"
     Title="ClientSubscriptionAssistant">
 
-    <ShellContent
-        Title="Home"
+    <FlyoutItem Title="Main">
+        <ShellContent
+       
         ContentTemplate="{DataTemplate local:MainPage}"
         Route="MainPage" />
+    </FlyoutItem>
+    
+    <FlyoutItem Title="Login">
+        <ShellContent
+      
+    Title="Login"
+    ContentTemplate="{DataTemplate Views:LoginPage}"
+    Route="LoginPage" />
+        </FlyoutItem>
 
+    <FlyoutItem Title="Register">
+    <ShellContent
+       
+        ContentTemplate="{DataTemplate Views:RegisterPage}"
+        Route="RegisterPage" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Subscriptions">
+        <ShellContent
+    
+     ContentTemplate="{DataTemplate Views:SubscriptionPage}"
+     Route="SubscriptionPage" />
+    </FlyoutItem>
+    <FlyoutItem Title="Profile">
+        <ShellContent
+  
+   ContentTemplate="{DataTemplate Views:ProfilePage}"
+   Route="ProfilePage" />
+    </FlyoutItem>
 </Shell>

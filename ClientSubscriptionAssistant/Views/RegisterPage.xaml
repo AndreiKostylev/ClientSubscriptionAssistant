@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ClientSubscriptionAssistant.Views.RegisterPage"
+             Title="RegisterPage">
+    <ScrollView>
+        <VerticalStackLayout Spacing="20" Padding="30">
+
+
+            <VerticalStackLayout Spacing="10" HorizontalOptions="Center">
+                <Label Text="Регистрация"
+                       FontSize="28"
+                       FontAttributes="Bold"
+                       TextColor="#007ACC"/>
+                <Label Text="Создайте новый аккаунт"
+                       FontSize="14"
+                       TextColor="Gray"/>
+            </VerticalStackLayout>
+
+       
+            <Frame BackgroundColor="White"
+                   CornerRadius="12"
+                   Padding="20"
+                   HasShadow="True">
+
+                <VerticalStackLayout Spacing="15">
+
+            
+                    <VerticalStackLayout Spacing="5">
+                        <Label Text="Имя пользователя" FontSize="14"/>
+                        <Entry x:Name="UsernameEntry"
+                               Placeholder="ivanov"/>
+                    </VerticalStackLayout>
+
+            
+                    <VerticalStackLayout Spacing="5">
+                        <Label Text="Email" FontSize="14"/>
+                        <Entry x:Name="EmailEntry"
+                               Placeholder="ivanov@example.com"
+                               Keyboard="Email"/>
+                    </VerticalStackLayout>
+
+               
+                    <VerticalStackLayout Spacing="5">
+                        <Label Text="Пароль" FontSize="14"/>
+                        <Entry x:Name="PasswordEntry"
+                               Placeholder="Минимум 6 символов"
+                               IsPassword="True"/>
+                    </VerticalStackLayout>
+
+                   
+                    <VerticalStackLayout Spacing="5">
+                        <Label Text="Подтверждение пароля" FontSize="14"/>
+                        <Entry x:Name="ConfirmPasswordEntry"
+                               Placeholder="Повторите пароль"
+                               IsPassword="True"/>
+                    </VerticalStackLayout>
+
+                    
+                    <Button x:Name="RegisterButton"
+                            Text="Зарегистрироваться"
+                            BackgroundColor="#28A745"
+                            TextColor="White"
+                            FontSize="16"
+                            CornerRadius="10"
+                            Padding="20,12"
+                            Clicked="OnRegisterClicked"/>
+
+              
+                    <Label x:Name="ErrorLabel"
+                           TextColor="Red"
+                           IsVisible="False"/>
+
+                </VerticalStackLayout>
+
+            </Frame>
+
+
+            <Frame BackgroundColor="Transparent"
+                   BorderColor="Transparent"
+                   Padding="0">
+
+                <HorizontalStackLayout HorizontalOptions="Center" Spacing="5">
+                    <Label Text="Уже есть аккаунт?" FontSize="14"/>
+                    <Button Text="Войти"
+                            TextColor="#007ACC"
+                            BackgroundColor="Transparent"
+                            FontSize="14"
+                            Clicked="OnLoginClicked"/>
+                </HorizontalStackLayout>
+            </Frame>
+            <ActivityIndicator x:Name="LoadingIndicator"
+                               Color="#007ACC"
+                               IsRunning="False"
+                               HorizontalOptions="Center"/>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
