@@ -4,42 +4,42 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:ClientSubscriptionAssistant"
-     xmlns:Views="clr-namespace:ClientSubscriptionAssistant.Views"
+    xmlns:Views="clr-namespace:ClientSubscriptionAssistant.Views"
     Shell.FlyoutBehavior="Flyout"
-    Title="ClientSubscriptionAssistant">
+    Title="Subscription Assistant">
 
-    <FlyoutItem Title="Main">
-        <ShellContent
-       
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
-    </FlyoutItem>
-    
-    <FlyoutItem Title="Login">
-        <ShellContent
-      
-    Title="Login"
-    ContentTemplate="{DataTemplate Views:LoginPage}"
-    Route="LoginPage" />
-        </FlyoutItem>
 
-    <FlyoutItem Title="Register">
-    <ShellContent
-       
-        ContentTemplate="{DataTemplate Views:RegisterPage}"
-        Route="RegisterPage" />
+    <FlyoutItem Title="Главная" Icon="home.png">
+        <ShellContent
+            ContentTemplate="{DataTemplate local:MainPage}"
+            Route="MainPage" />
     </FlyoutItem>
 
-    <FlyoutItem Title="Subscriptions">
+
+    <FlyoutItem Title="Вход" Icon="login.png">
         <ShellContent
-    
-     ContentTemplate="{DataTemplate Views:SubscriptionPage}"
-     Route="SubscriptionPage" />
+            Title="Вход"
+            ContentTemplate="{DataTemplate Views:LoginPage}"
+            Route="LoginPage" />
     </FlyoutItem>
-    <FlyoutItem Title="Profile">
+
+    <FlyoutItem Title="Регистрация" Icon="register.png">
         <ShellContent
-  
-   ContentTemplate="{DataTemplate Views:ProfilePage}"
-   Route="ProfilePage" />
+            ContentTemplate="{DataTemplate Views:RegisterPage}"
+            Route="RegisterPage" />
     </FlyoutItem>
+
+
+    <FlyoutItem Title="Мои подписки" Icon="subscription.png">
+        <ShellContent
+            ContentTemplate="{DataTemplate Views:SubscriptionPage}"
+            Route="SubscriptionPage" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Профиль" Icon="profile.png">
+        <ShellContent
+            ContentTemplate="{DataTemplate Views:ProfilePage}"
+            Route="ProfilePage" />
+    </FlyoutItem>
+
 </Shell>

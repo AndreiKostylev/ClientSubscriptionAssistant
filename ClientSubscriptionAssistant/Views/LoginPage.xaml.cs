@@ -1,27 +1,43 @@
+using ClientSubscriptionAssistant.ViewModels;
+using Microsoft.Extensions.Logging.Abstractions;
+
 namespace ClientSubscriptionAssistant.Views;
 
 public partial class LoginPage : ContentPage
 {
-	public LoginPage()
-	{
-		InitializeComponent();
-	}
-    private async void OnLoginClicked(object sender, EventArgs e)
+    private readonly LoginViewModel _viewModel;
+
+    public LoginPage(LoginViewModel viewModel)
     {
-        LoadingIndicator.IsRunning = true;
-        ErrorLabel.IsVisible = false;
-
-   
-        await Task.Delay(1000); 
-
-        LoadingIndicator.IsRunning = false;
-
-       
-        await Shell.Current.GoToAsync("//main");
+        InitializeComponent();
+        _viewModel = viewModel;
+        BindingContext = _viewModel;
     }
 
-    private async void OnRegisterClicked(object sender, EventArgs e)
+    protected override void OnAppearing()
     {
-        await Shell.Current.GoToAsync("//register");
+        base.OnAppearing();
+
+       
+        if (_viewModel != null)
+        {
+            _viewModel.Login = string.Empty;
+            _viewModel.Password = string.Empty;
+            _viewModel.ErrorMessage = string.Empty;
+        }
+    }
+
+
+    private void OnPasswordCompleted(object sender, EventArgs e)
+    {
+        if (_viewModel != null &&
+            !string.IsNullOrEmpty(_viewModel.Login) &&
+            !string.IsNullOrEmpty(_viewModel.Password))
+        {
+            if (_viewModel.LoginCommand.CanExecute(null))
+            {
+                _viewModel.LoginCommand.Execute(null);
+            }
+        }
     }
 }

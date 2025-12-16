@@ -2,11 +2,12 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ClientSubscriptionAssistant.Views.RegisterPage"
-             Title="RegisterPage">
+             Title="Регистрация">
+
     <ScrollView>
         <VerticalStackLayout Spacing="20" Padding="30">
 
-
+            <!-- Заголовок -->
             <VerticalStackLayout Spacing="10" HorizontalOptions="Center">
                 <Label Text="Регистрация"
                        FontSize="28"
@@ -17,7 +18,7 @@
                        TextColor="Gray"/>
             </VerticalStackLayout>
 
-       
+            <!-- Форма регистрации -->
             <Frame BackgroundColor="White"
                    CornerRadius="12"
                    Padding="20"
@@ -25,38 +26,42 @@
 
                 <VerticalStackLayout Spacing="15">
 
-            
+                    <!-- Имя пользователя -->
                     <VerticalStackLayout Spacing="5">
                         <Label Text="Имя пользователя" FontSize="14"/>
                         <Entry x:Name="UsernameEntry"
-                               Placeholder="ivanov"/>
+                               Placeholder="ivanov"
+                               Text="{Binding Username}"/>
                     </VerticalStackLayout>
 
-            
+                    <!-- Email -->
                     <VerticalStackLayout Spacing="5">
                         <Label Text="Email" FontSize="14"/>
                         <Entry x:Name="EmailEntry"
                                Placeholder="ivanov@example.com"
+                               Text="{Binding Email}"
                                Keyboard="Email"/>
                     </VerticalStackLayout>
 
-               
+                    <!-- Пароль -->
                     <VerticalStackLayout Spacing="5">
                         <Label Text="Пароль" FontSize="14"/>
                         <Entry x:Name="PasswordEntry"
                                Placeholder="Минимум 6 символов"
+                               Text="{Binding Password}"
                                IsPassword="True"/>
                     </VerticalStackLayout>
 
-                   
+                    <!-- Подтверждение пароля -->
                     <VerticalStackLayout Spacing="5">
                         <Label Text="Подтверждение пароля" FontSize="14"/>
                         <Entry x:Name="ConfirmPasswordEntry"
                                Placeholder="Повторите пароль"
+                               Text="{Binding ConfirmPassword}"
                                IsPassword="True"/>
                     </VerticalStackLayout>
 
-                    
+                    <!-- Кнопка регистрации -->
                     <Button x:Name="RegisterButton"
                             Text="Зарегистрироваться"
                             BackgroundColor="#28A745"
@@ -64,18 +69,20 @@
                             FontSize="16"
                             CornerRadius="10"
                             Padding="20,12"
-                            Clicked="OnRegisterClicked"/>
+                            Command="{Binding RegisterCommand}"/>
 
-              
+                    <!-- Сообщение об ошибке -->
                     <Label x:Name="ErrorLabel"
+                           Text="{Binding ErrorMessage}"
                            TextColor="Red"
-                           IsVisible="False"/>
+                           FontSize="14"
+                           IsVisible="{Binding ErrorMessage, Converter={StaticResource StringIsNotEmptyConverter}}"/>
 
                 </VerticalStackLayout>
 
             </Frame>
 
-
+            <!-- Ссылка на вход -->
             <Frame BackgroundColor="Transparent"
                    BorderColor="Transparent"
                    Padding="0">
@@ -86,12 +93,14 @@
                             TextColor="#007ACC"
                             BackgroundColor="Transparent"
                             FontSize="14"
-                            Clicked="OnLoginClicked"/>
+                            Command="{Binding NavigateToLoginCommand}"/>
                 </HorizontalStackLayout>
             </Frame>
+
+            <!-- Индикатор загрузки -->
             <ActivityIndicator x:Name="LoadingIndicator"
+                               IsRunning="{Binding IsBusy}"
                                Color="#007ACC"
-                               IsRunning="False"
                                HorizontalOptions="Center"/>
 
         </VerticalStackLayout>

@@ -42,6 +42,6 @@ public partial class RegisterPage : ContentPage
 
     private async void OnLoginClicked(object sender, EventArgs e)
     {
-        await Shell.Current.GoToAsync("//login");
+        await Shell.Current.GoToAsync("//LoginPage");
     }
 }
