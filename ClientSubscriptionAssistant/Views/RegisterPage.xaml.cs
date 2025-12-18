@@ -1,47 +1,45 @@
+using ClientSubscriptionAssistant.ViewModels;
+
 namespace ClientSubscriptionAssistant.Views;
 
 public partial class RegisterPage : ContentPage
 {
-    public RegisterPage()
+    private readonly RegisterViewModel _viewModel;
+
+    public RegisterPage(RegisterViewModel viewModel)
     {
         InitializeComponent();
+        _viewModel = viewModel;
+        BindingContext = _viewModel;
     }
 
-    private async void OnRegisterClicked(object sender, EventArgs e)
+    protected override void OnAppearing()
     {
-        LoadingIndicator.IsRunning = true;
-        ErrorLabel.IsVisible = false;
-
-  
-        if (string.IsNullOrEmpty(UsernameEntry.Text) ||
-            string.IsNullOrEmpty(EmailEntry.Text) ||
-            string.IsNullOrEmpty(PasswordEntry.Text))
-        {
-            ErrorLabel.Text = "Заполните все поля";
-            ErrorLabel.IsVisible = true;
-            LoadingIndicator.IsRunning = false;
-            return;
-        }
-
-        if (PasswordEntry.Text != ConfirmPasswordEntry.Text)
-        {
-            ErrorLabel.Text = "Пароли не совпадают";
-            ErrorLabel.IsVisible = true;
-            LoadingIndicator.IsRunning = false;
-            return;
-        }
+        base.OnAppearing();
 
  
-        await Task.Delay(1000); 
-
-        LoadingIndicator.IsRunning = false;
-
-       
-        await Shell.Current.GoToAsync("//main");
+        if (_viewModel != null)
+        {
+            _viewModel.Username = string.Empty;
+            _viewModel.Email = string.Empty;
+            _viewModel.Password = string.Empty;
+            _viewModel.ConfirmPassword = string.Empty;
+            _viewModel.ErrorMessage = string.Empty;
+        }
     }
 
-    private async void OnLoginClicked(object sender, EventArgs e)
+    private void OnConfirmPasswordCompleted(object sender, EventArgs e)
     {
-        await Shell.Current.GoToAsync("//LoginPage");
+        if (_viewModel != null &&
+            !string.IsNullOrEmpty(_viewModel.Username) &&
+            !string.IsNullOrEmpty(_viewModel.Email) &&
+            !string.IsNullOrEmpty(_viewModel.Password) &&
+            !string.IsNullOrEmpty(_viewModel.ConfirmPassword))
+        {
+            if (_viewModel.RegisterCommand.CanExecute(null))
+            {
+                _viewModel.RegisterCommand.Execute(null);
+            }
+        }
     }
 }

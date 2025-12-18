@@ -2,164 +2,328 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ClientSubscriptionAssistant.Views.SubscriptionPage"
-             Title="SubscriptionPage">
-    <Grid RowDefinitions="auto,*,auto">
+             Title="Мои подписки">
 
+    <RefreshView IsRefreshing="{Binding IsBusy}"
+                 Command="{Binding RefreshCommand}">
 
-        <Frame Grid.Row="0"
-               BackgroundColor="#007ACC"
-               CornerRadius="0"
-               Padding="20,15"
-               HasShadow="True">
+        <ScrollView>
+            <VerticalStackLayout Spacing="15" Padding="15">
 
-            <HorizontalStackLayout>
-                <Label Text="Мои подписки"
-                       FontSize="20"
-                       FontAttributes="Bold"
-                       TextColor="White"/>
-
-                <Button Text="➕"
-                        TextColor="White"
-                        BackgroundColor="Transparent"
-                        FontSize="24"
-                        HorizontalOptions="EndAndExpand"
-                        />
-            </HorizontalStackLayout>
-
-        </Frame>
-
-    
-        <CollectionView Grid.Row="1"
-                        x:Name="SubscriptionsList"
-                        Margin="10"
-                        SelectionMode="Single"
-                        >
-
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <Frame BackgroundColor="White"
-                           CornerRadius="10"
-                           Padding="15"
-                           Margin="0,0,0,10"
-                           HasShadow="True">
-
-                        <Grid ColumnDefinitions="auto,*,auto" ColumnSpacing="15">
-
-                          
-                            <Frame Grid.Column="0"
-                                   WidthRequest="50"
-                                   HeightRequest="50"
-                                   CornerRadius="8"
-                                   BackgroundColor="#007ACC"
-                                   Padding="0">
-                                <Label Text="📊"
-                                       FontSize="20"
-                                       HorizontalOptions="Center"
-                                       VerticalOptions="Center"/>
-                            </Frame>
-
-                          
-                            <VerticalStackLayout Grid.Column="1" Spacing="5">
-                                <Label Text="{Binding Name}"
-                                       FontSize="16"
-                                       FontAttributes="Bold"/>
-
-                                <Label Text="{Binding ServiceName}"
-                                       FontSize="14"
-                                       TextColor="Gray"/>
-
-                                <Label Text="{Binding NextPaymentDate, StringFormat='Следующая оплата: {0:dd.MM.yyyy}'}"
-                                       FontSize="12"
-                                       TextColor="Gray"/>
-                            </VerticalStackLayout>
-
-                      
-                            <VerticalStackLayout Grid.Column="2" Spacing="5">
-                                <Label Text="{Binding Price, StringFormat='{0:C}'}"
-                                       FontSize="16"
-                                       FontAttributes="Bold"
-                                       TextColor="#007ACC"/>
-
-                                <Frame BackgroundColor="{Binding StatusColor}"
-                                       CornerRadius="5"
-                                       Padding="8,4">
-                                    <Label Text="{Binding Status}"
-                                           FontSize="10"
-                                           TextColor="White"/>
-                                </Frame>
-                            </VerticalStackLayout>
-
-                        </Grid>
-                    </Frame>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-
-         
-            <CollectionView.EmptyView>
-                <VerticalStackLayout HorizontalOptions="Center" 
-                                     VerticalOptions="Center"
-                                     Padding="40">
-                    <Label Text="📭" 
-                           FontSize="40"
-                           HorizontalOptions="Center"/>
-                    <Label Text="Нет подписок" 
-                           FontSize="18"
+          
+                <Grid ColumnDefinitions="*,auto">
+                    <Label Text="Мои подписки"
+                           FontSize="24"
                            FontAttributes="Bold"
-                           HorizontalOptions="Center"/>
-                    <Label Text="Добавьте свою первую подписку" 
-                           FontSize="14"
-                           TextColor="Gray"
-                           HorizontalOptions="Center"/>
-                    <Button Text="➕ Добавить подписку"
-                            BackgroundColor="#007ACC"
+                           VerticalOptions="Center"/>
+
+                    <Button Text="← Назад"
+                            BackgroundColor="Gray"
+                            TextColor="White"
+                            CornerRadius="10"
+                            Padding="10,5"
+                            Grid.Column="1"
+                            Command="{Binding NavigateToMainCommand}"/>
+                </Grid>
+
+      
+                <Frame BackgroundColor="LightBlue"
+                       CornerRadius="10"
+                       Padding="15">
+                    <VerticalStackLayout Spacing="10">
+                        <HorizontalStackLayout HorizontalOptions="Center" Spacing="30">
+                            <VerticalStackLayout Spacing="5" HorizontalOptions="Center">
+                                <Label Text="{Binding Subscriptions.Count, StringFormat='{0}'}"
+                                       FontSize="24"
+                                       FontAttributes="Bold"
+                                       HorizontalOptions="Center"/>
+                                <Label Text="Подписок"
+                                       FontSize="12"
+                                       HorizontalOptions="Center"/>
+                            </VerticalStackLayout>
+
+                            <VerticalStackLayout Spacing="5" HorizontalOptions="Center">
+                                <Label Text="{Binding TotalMonthlyCost, StringFormat='{0:C}'}"
+                                       FontSize="24"
+                                       FontAttributes="Bold"
+                                       HorizontalOptions="Center"/>
+                                <Label Text="В месяц"
+                                       FontSize="12"
+                                       HorizontalOptions="Center"/>
+                            </VerticalStackLayout>
+                        </HorizontalStackLayout>
+                    </VerticalStackLayout>
+                </Frame>
+
+                <Frame BackgroundColor="White"
+                       CornerRadius="10"
+                       Padding="15"
+                       HasShadow="True">
+
+                    <VerticalStackLayout Spacing="10">
+                        <Label Text="Фильтр:"
+                               FontSize="16"
+                               FontAttributes="Bold"/>
+
+                        <HorizontalStackLayout Spacing="10">
+                            <Button Text="Все"
+                                    BackgroundColor="{Binding AllFilterColor}"
+                                    TextColor="White"
+                                    CornerRadius="8"
+                                    Padding="15,8"
+                                    Command="{Binding FilterAllCommand}"/>
+
+                            <Button Text="Активные"
+                                    BackgroundColor="{Binding ActiveFilterColor}"
+                                    TextColor="White"
+                                    CornerRadius="8"
+                                    Padding="15,8"
+                                    Command="{Binding FilterActiveCommand}"/>
+
+                            <Button Text="Неактивные"
+                                    BackgroundColor="{Binding InactiveFilterColor}"
+                                    TextColor="White"
+                                    CornerRadius="8"
+                                    Padding="15,8"
+                                    Command="{Binding FilterInactiveCommand}"/>
+                        </HorizontalStackLayout>
+                    </VerticalStackLayout>
+
+                </Frame>
+
+                <Frame BackgroundColor="White"
+                       CornerRadius="10"
+                       Padding="15"
+                       HasShadow="True">
+
+                    <Button Text="➕ Добавить новую подписку"
+                            BackgroundColor="#28A745"
                             TextColor="White"
                             FontSize="16"
                             CornerRadius="10"
-                            Padding="20,10"
-                            Margin="0,20"
-                            />
-                </VerticalStackLayout>
-            </CollectionView.EmptyView>
+                            Padding="20,12"
+                            Command="{Binding ShowAddFormCommand}"/>
 
-        </CollectionView>
+                </Frame>
 
+   
+                <Frame BackgroundColor="White"
+                       CornerRadius="10"
+                       Padding="15"
+                       HasShadow="True"
+                       IsVisible="{Binding ShowAddForm}">
 
-        <Frame Grid.Row="2"
-               BackgroundColor="White"
-               CornerRadius="10"
-               Margin="10,0,10,10"
-               Padding="15"
-               HasShadow="True">
+                    <VerticalStackLayout Spacing="15">
 
-            <HorizontalStackLayout Spacing="10">
-                <Button Text="Все"
-                        BackgroundColor="#007ACC"
-                        TextColor="White"
-                        CornerRadius="8"
-                        Padding="15,8"/>
+                        <Label Text="Добавить новую подписку"
+                               FontSize="18"
+                               FontAttributes="Bold"/>
 
-                <Button Text="Активные"
-                        BackgroundColor="#E0E0E0"
-                        TextColor="Black"
-                        CornerRadius="8"
-                        Padding="15,8"/>
+              
+                        <VerticalStackLayout Spacing="5">
+                            <Label Text="Название *" FontSize="14"/>
+                            <Entry Placeholder="Например: Netflix Premium"
+                                   Text="{Binding NewSubscriptionName}"/>
+                        </VerticalStackLayout>
 
-                <Button Text="Неактивные"
-                        BackgroundColor="#E0E0E0"
-                        TextColor="Black"
-                        CornerRadius="8"
-                        Padding="15,8"/>
-            </HorizontalStackLayout>
+           
+                        <VerticalStackLayout Spacing="5">
+                            <Label Text="Цена (₽) *" FontSize="14"/>
+                            <Entry Placeholder="Например: 599"
+                                   Text="{Binding NewSubscriptionPrice}"
+                                   Keyboard="Numeric"/>
+                        </VerticalStackLayout>
 
-        </Frame>
+                       
+                        <VerticalStackLayout Spacing="5">
+                            <Label Text="Дата начала *" FontSize="14"/>
+                            <DatePicker Date="{Binding NewSubscriptionStartDate}"
+                                        Format="dd.MM.yyyy"/>
+                        </VerticalStackLayout>
 
-    
-        <ActivityIndicator Grid.RowSpan="3"
-                           x:Name="LoadingIndicator"
-                           Color="#007ACC"
-                           IsRunning="False"
-                           HorizontalOptions="Center"
-                           VerticalOptions="Center"/>
+                       
+                        <VerticalStackLayout Spacing="5">
+                            <Label Text="Цикл оплаты *" FontSize="14"/>
+                            <Picker SelectedItem="{Binding NewSubscriptionBillingCycle}">
+                                <Picker.ItemsSource>
+                                    <x:Array Type="{x:Type x:String}">
+                                        <x:String>monthly</x:String>
+                                        <x:String>yearly</x:String>
+                                    </x:Array>
+                                </Picker.ItemsSource>
+                            </Picker>
+                        </VerticalStackLayout>
 
-    </Grid>
+      
+                        <VerticalStackLayout Spacing="5">
+                            <Label Text="Категория *" FontSize="14"/>
+                            <Picker Title="Выберите категорию"
+                                    ItemsSource="{Binding Categories}"
+                                    SelectedItem="{Binding SelectedCategory}"
+                                    ItemDisplayBinding="{Binding Name}"/>
+                        </VerticalStackLayout>
+
+            
+                        <VerticalStackLayout Spacing="5">
+                            <Label Text="Сервис *" FontSize="14"/>
+                            <Picker Title="Выберите сервис"
+                                    ItemsSource="{Binding Services}"
+                                    SelectedItem="{Binding SelectedService}"
+                                    ItemDisplayBinding="{Binding Name}"/>
+                        </VerticalStackLayout>
+
+                    
+                        <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
+
+                            <Button Text="Отмена"
+                                    BackgroundColor="Gray"
+                                    TextColor="White"
+                                    FontSize="16"
+                                    CornerRadius="10"
+                                    Padding="15,10"
+                                    Command="{Binding HideAddFormCommand}"/>
+
+                            <Button Text="Добавить"
+                                    BackgroundColor="#28A745"
+                                    TextColor="White"
+                                    FontSize="16"
+                                    CornerRadius="10"
+                                    Padding="15,10"
+                                    Grid.Column="1"
+                                    Command="{Binding AddSubscriptionCommand}"/>
+
+                        </Grid>
+
+                    </VerticalStackLayout>
+
+                </Frame>
+
+       
+                <Frame BackgroundColor="White"
+                       CornerRadius="10"
+                       Padding="0"
+                       HasShadow="True">
+
+                    <CollectionView ItemsSource="{Binding Subscriptions}"
+                                    SelectionMode="Single"
+                                    SelectionChanged="OnSubscriptionSelected">
+
+                        <CollectionView.EmptyView>
+                            <VerticalStackLayout HorizontalOptions="Center" 
+                                                 VerticalOptions="Center"
+                                                 Padding="40"
+                                                 Spacing="15">
+                                <Label Text="📭" 
+                                       FontSize="50"
+                                       HorizontalOptions="Center"/>
+                                <Label Text="Нет подписок" 
+                                       FontSize="18"
+                                       FontAttributes="Bold"
+                                       HorizontalOptions="Center"/>
+                                <Label Text="Добавьте свою первую подписку" 
+                                       FontSize="14"
+                                       TextColor="Gray"
+                                       HorizontalOptions="Center"/>
+                            </VerticalStackLayout>
+                        </CollectionView.EmptyView>
+
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Frame BackgroundColor="#F8F9FA"
+                                       CornerRadius="10"
+                                       Padding="15"
+                                       Margin="10,5,10,5"
+                                       HasShadow="False">
+
+                                    <Grid ColumnDefinitions="auto,*,auto" ColumnSpacing="15">
+
+                                       
+                                        <Frame Grid.Column="0"
+                                               WidthRequest="40"
+                                               HeightRequest="40"
+                                               CornerRadius="8"
+                                               BackgroundColor="#28A745"
+                                               Padding="0"
+                                               IsVisible="{Binding IsActive}">
+                                            <Label Text="✓"
+                                                   FontSize="16"
+                                                   HorizontalOptions="Center"
+                                                   VerticalOptions="Center"/>
+                                        </Frame>
+
+                                        <Frame Grid.Column="0"
+                                               WidthRequest="40"
+                                               HeightRequest="40"
+                                               CornerRadius="8"
+                                               BackgroundColor="#6C757D"
+                                               Padding="0"
+                                               IsVisible="{Binding IsActive, Converter={x:StaticResource InvertBoolConverter}}">
+                                            <Label Text="✕"
+                                                   FontSize="16"
+                                                   HorizontalOptions="Center"
+                                                   VerticalOptions="Center"/>
+                                        </Frame>
+
+                                   
+                                        <VerticalStackLayout Grid.Column="1" Spacing="5">
+                                            <Label Text="{Binding Name}"
+                                                   FontSize="16"
+                                                   FontAttributes="Bold"/>
+
+                                            <Label Text="{Binding Service.Name, StringFormat='Сервис: {0}'}"
+                                                   FontSize="14"
+                                                   TextColor="#666"/>
+
+                                            <Label Text="{Binding Category.Name, StringFormat='Категория: {0}'}"
+                                                   FontSize="12"
+                                                   TextColor="#888"/>
+
+                                            <Label Text="{Binding NextPaymentDate, StringFormat='След. оплата: {0:dd.MM.yyyy}'}"
+                                                   FontSize="11"
+                                                   TextColor="#999"/>
+                                        </VerticalStackLayout>
+
+                                      
+                                        <VerticalStackLayout Grid.Column="2" Spacing="5">
+                                            <Label Text="{Binding Price, StringFormat='{0:C}'}"
+                                                   FontSize="16"
+                                                   FontAttributes="Bold"
+                                                   TextColor="#007ACC"/>
+
+                                            <Grid ColumnDefinitions="*,*" ColumnSpacing="5">
+                                                <Button Text="✕"
+                                                        BackgroundColor="#DC3545"
+                                                        TextColor="White"
+                                                        FontSize="12"
+                                                        CornerRadius="5"
+                                                        Padding="8,4"
+                                                        Clicked="OnDeleteClicked"/>
+
+                                                <Button Text="⏸"
+                                                        BackgroundColor="#FFC107"
+                                                        TextColor="Black"
+                                                        FontSize="12"
+                                                        CornerRadius="5"
+                                                        Padding="8,4"
+                                                        Grid.Column="1"
+                                                        IsVisible="{Binding IsActive}"
+                                                        Clicked="OnDeactivateClicked"/>
+                                            </Grid>
+                                        </VerticalStackLayout>
+
+                                    </Grid>
+
+                                </Frame>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+
+                    </CollectionView>
+
+                </Frame>
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+    </RefreshView>
+
 </ContentPage>

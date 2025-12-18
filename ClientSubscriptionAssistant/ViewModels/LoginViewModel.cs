@@ -67,7 +67,7 @@ namespace ClientSubscriptionAssistant.ViewModels
 
                 if (result.IsSuccess && result.Data != null)
                 {
-                    // Успешный вход
+                    
                     await Shell.Current.GoToAsync("//MainPage");
                     ClearFields();
                 }

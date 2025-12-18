@@ -19,19 +19,31 @@ namespace ClientSubscriptionAssistant
                 });
 
 #if DEBUG
-    		builder.Logging.AddDebug();
+            builder.Logging.AddDebug();
 #endif
+
+            // Регистрация сервисов
             builder.Services.AddSingleton<IApiService, ApiService>();
             builder.Services.AddSingleton<ISecureStorageService, SecureStorageService>();
-           
-
-        
             builder.Services.AddSingleton<IAuthService, AuthService>();
             builder.Services.AddSingleton<IUserService, UserService>();
             builder.Services.AddSingleton<ISubscriptionService, SubscriptionService>();
-            builder.Services.AddSingleton<LoginViewModel>();
-            builder.Services.AddSingleton<LoginPage>();
-            builder.Services.AddSingleton<IAuthService, AuthService>();
+
+            // Регистрация ViewModels
+            builder.Services.AddTransient<MainViewModel>();
+            builder.Services.AddTransient<LoginViewModel>();
+            builder.Services.AddTransient<RegisterViewModel>();
+            builder.Services.AddTransient<SubscriptionViewModel>();
+
+            // Регистрация страниц
+            builder.Services.AddTransient<MainPage>();
+            builder.Services.AddTransient<LoginPage>();
+            builder.Services.AddTransient<RegisterPage>();
+            builder.Services.AddTransient<SubscriptionPage>();
+            builder.Services.AddTransient<ProfilePage>();
+
+            // Регистрация AppShell
+            builder.Services.AddSingleton<AppShell>();
 
             return builder.Build();
         }

@@ -6,8 +6,6 @@
 
     <ScrollView>
         <VerticalStackLayout Spacing="20" Padding="30">
-
-            <!-- Заголовок -->
             <VerticalStackLayout Spacing="10" HorizontalOptions="Center">
                 <Label Text="Регистрация"
                        FontSize="28"
@@ -18,7 +16,7 @@
                        TextColor="Gray"/>
             </VerticalStackLayout>
 
-            <!-- Форма регистрации -->
+  
             <Frame BackgroundColor="White"
                    CornerRadius="12"
                    Padding="20"
@@ -26,7 +24,7 @@
 
                 <VerticalStackLayout Spacing="15">
 
-                    <!-- Имя пользователя -->
+           
                     <VerticalStackLayout Spacing="5">
                         <Label Text="Имя пользователя" FontSize="14"/>
                         <Entry x:Name="UsernameEntry"
@@ -34,7 +32,7 @@
                                Text="{Binding Username}"/>
                     </VerticalStackLayout>
 
-                    <!-- Email -->
+               
                     <VerticalStackLayout Spacing="5">
                         <Label Text="Email" FontSize="14"/>
                         <Entry x:Name="EmailEntry"
@@ -43,7 +41,7 @@
                                Keyboard="Email"/>
                     </VerticalStackLayout>
 
-                    <!-- Пароль -->
+            
                     <VerticalStackLayout Spacing="5">
                         <Label Text="Пароль" FontSize="14"/>
                         <Entry x:Name="PasswordEntry"
@@ -52,7 +50,7 @@
                                IsPassword="True"/>
                     </VerticalStackLayout>
 
-                    <!-- Подтверждение пароля -->
+                
                     <VerticalStackLayout Spacing="5">
                         <Label Text="Подтверждение пароля" FontSize="14"/>
                         <Entry x:Name="ConfirmPasswordEntry"
@@ -61,7 +59,7 @@
                                IsPassword="True"/>
                     </VerticalStackLayout>
 
-                    <!-- Кнопка регистрации -->
+                
                     <Button x:Name="RegisterButton"
                             Text="Зарегистрироваться"
                             BackgroundColor="#28A745"
@@ -71,7 +69,7 @@
                             Padding="20,12"
                             Command="{Binding RegisterCommand}"/>
 
-                    <!-- Сообщение об ошибке -->
+                
                     <Label x:Name="ErrorLabel"
                            Text="{Binding ErrorMessage}"
                            TextColor="Red"
@@ -82,7 +80,7 @@
 
             </Frame>
 
-            <!-- Ссылка на вход -->
+            
             <Frame BackgroundColor="Transparent"
                    BorderColor="Transparent"
                    Padding="0">
@@ -97,7 +95,7 @@
                 </HorizontalStackLayout>
             </Frame>
 
-            <!-- Индикатор загрузки -->
+           
             <ActivityIndicator x:Name="LoadingIndicator"
                                IsRunning="{Binding IsBusy}"
                                Color="#007ACC"

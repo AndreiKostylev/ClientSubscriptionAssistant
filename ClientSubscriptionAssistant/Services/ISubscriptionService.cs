@@ -11,7 +11,7 @@ namespace ClientSubscriptionAssistant.Services
     {
         Task<ApiResponse<IEnumerable<SubscriptionDTO>>> GetUserSubscriptionsAsync(int userId);
         Task<ApiResponse<SubscriptionDTO>> GetSubscriptionByIdAsync(int id);
-        Task<ApiResponse<SubscriptionDTO>> CreateSubscriptionAsync(CreateSubscriptionDTO subscriptionDto);
+       
         Task<ApiResponse<bool>> DeactivateSubscriptionAsync(int id);
         Task<ApiResponse<IEnumerable<SubscriptionDTO>>> GetExpiringSubscriptionsAsync(int daysBeforeExpiry);
         Task<ApiResponse<bool>> DeleteSubscriptionAsync(int id);
