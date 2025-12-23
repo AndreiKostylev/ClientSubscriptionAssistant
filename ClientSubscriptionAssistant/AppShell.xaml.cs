@@ -11,7 +11,8 @@
             Routing.RegisterRoute("register", typeof(Views.RegisterPage));
             Routing.RegisterRoute("subscriptions", typeof(Views.SubscriptionPage));
             Routing.RegisterRoute("profile", typeof(Views.ProfilePage));
-           
+            GoToAsync("//LoginPage", false);
+
         }
 
         protected override void OnAppearing()

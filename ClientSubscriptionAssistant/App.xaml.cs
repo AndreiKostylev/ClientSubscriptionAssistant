@@ -7,6 +7,8 @@
             InitializeComponent();
 
             MainPage = new AppShell();
+
+
             this.RequestedThemeChanged += OnRequestedThemeChanged;
         }
         private void OnRequestedThemeChanged(object sender, AppThemeChangedEventArgs e)
@@ -16,6 +18,7 @@
         protected override void OnStart()
         {
             base.OnStart();
+
             
         }
         protected override void OnSleep()

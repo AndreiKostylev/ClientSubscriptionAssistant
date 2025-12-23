@@ -36,10 +36,4 @@
             Route="SubscriptionPage" />
     </FlyoutItem>
 
-    <FlyoutItem Title="Профиль" Icon="profile.png">
-        <ShellContent
-            ContentTemplate="{DataTemplate Views:ProfilePage}"
-            Route="ProfilePage" />
-    </FlyoutItem>
-
 </Shell>

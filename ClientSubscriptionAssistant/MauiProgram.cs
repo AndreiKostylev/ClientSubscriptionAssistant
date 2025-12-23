@@ -36,8 +36,9 @@ namespace ClientSubscriptionAssistant
             builder.Services.AddTransient<SubscriptionViewModel>();
 
             // Регистрация страниц
-            builder.Services.AddTransient<MainPage>();
             builder.Services.AddTransient<LoginPage>();
+            builder.Services.AddTransient<MainPage>();
+          
             builder.Services.AddTransient<RegisterPage>();
             builder.Services.AddTransient<SubscriptionPage>();
             builder.Services.AddTransient<ProfilePage>();

@@ -159,34 +159,14 @@
                             Padding="10"
                             Grid.Column="1"
                             Command="{Binding NavigateToSubscriptionsCommand}"/>
-
-                    <Button Text="Профиль"
-                            BackgroundColor="Purple"
-                            TextColor="White"
-                            CornerRadius="10"
-                            Padding="10"
-                            Grid.Column="2"
-                            Command="{Binding NavigateToProfileCommand}"/>
-
                 </Grid>
 
                
                 <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
 
-                    <Button Text="Регистрация"
-                            BackgroundColor="Orange"
-                            TextColor="White"
-                            CornerRadius="10"
-                            Padding="15,10"
-                            Command="{Binding NavigateToRegisterCommand}"/>
+                  
 
-                    <Button Text="Обновить"
-                            BackgroundColor="Gray"
-                            TextColor="White"
-                            CornerRadius="10"
-                            Padding="15,10"
-                            Grid.Column="1"
-                            Command="{Binding RefreshCommand}"/>
+        
 
                 </Grid>
 

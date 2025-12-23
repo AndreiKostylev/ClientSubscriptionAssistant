@@ -7,7 +7,6 @@
     <ScrollView>
         <VerticalStackLayout Spacing="20" Padding="30">
 
-     
             <VerticalStackLayout Spacing="10" HorizontalOptions="Center">
                 <Label Text="Вход в систему"
                        FontSize="28"
@@ -18,7 +17,6 @@
                        TextColor="Gray"/>
             </VerticalStackLayout>
 
-       
             <Frame BackgroundColor="White"
                    CornerRadius="12"
                    Padding="20"
@@ -26,7 +24,6 @@
 
                 <VerticalStackLayout Spacing="15">
 
-              
                     <VerticalStackLayout Spacing="5">
                         <Label Text="Email или имя пользователя" FontSize="14"/>
                         <Entry Placeholder="ivanov@example.com или ivanov"
@@ -34,15 +31,14 @@
                                Keyboard="Default"/>
                     </VerticalStackLayout>
 
-            
                     <VerticalStackLayout Spacing="5">
                         <Label Text="Пароль" FontSize="14"/>
                         <Entry Placeholder="Введите пароль"
                                Text="{Binding Password}"
-                               IsPassword="True"/>
+                               IsPassword="True"
+                               Completed="OnPasswordCompleted"/>
                     </VerticalStackLayout>
 
-                   
                     <Button Text="Войти"
                             BackgroundColor="#007ACC"
                             TextColor="White"
@@ -51,17 +47,16 @@
                             Padding="20,12"
                             Command="{Binding LoginCommand}"/>
 
-                
+
                     <Label Text="{Binding ErrorMessage}"
                            TextColor="Red"
                            FontSize="14"
-                           IsVisible="{Binding ErrorMessage, Converter={StaticResource StringIsNotEmptyConverter}}"/>
+                           IsVisible="{Binding ShowError}"/>
 
                 </VerticalStackLayout>
 
             </Frame>
 
-         
             <Frame BackgroundColor="Transparent"
                    BorderColor="Transparent"
                    Padding="0">
@@ -77,7 +72,6 @@
 
             </Frame>
 
-            
             <ActivityIndicator IsRunning="{Binding IsBusy}"
                                Color="#007ACC"
                                HorizontalOptions="Center"/>
