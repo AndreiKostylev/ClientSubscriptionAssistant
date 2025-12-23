@@ -26,9 +26,9 @@ namespace ClientSubscriptionAssistant.Services
             return await _apiService.GetAsync<SubscriptionDTO>($"api/subscriptions/{id}");
         }
 
-        public async Task<ApiResponse<SubscriptionDTO>> CreateSubscriptionAsync(CreateSubscriptionDTO subscriptionDto)
+        public async Task<ApiResponse<SubscriptionDTO>> CreateSubscriptionAsync(int userId, CreateSubscriptionDTO subscriptionDto)
         {
-            return await _apiService.PostAsync<SubscriptionDTO>($"api/subscriptions", subscriptionDto);
+            return await _apiService.PostAsync<SubscriptionDTO>($"api/subscriptions/user/{userId}", subscriptionDto);
         }
 
         public async Task<ApiResponse<bool>> DeactivateSubscriptionAsync(int id)
