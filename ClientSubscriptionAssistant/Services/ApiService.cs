@@ -130,13 +130,27 @@ namespace ClientSubscriptionAssistant.Services
 
                 if (response.IsSuccessStatusCode)
                 {
-                    var result = JsonSerializer.Deserialize<T>(responseContent, _jsonOptions);
-                    return new ApiResponse<T>
+                    // Пытаемся десериализовать, но если не получится - все равно возвращаем success
+                    try
                     {
-                        IsSuccess = true,
-                        Data = result,
-                        StatusCode = (int)response.StatusCode
-                    };
+                        var result = JsonSerializer.Deserialize<T>(responseContent, _jsonOptions);
+                        return new ApiResponse<T>
+                        {
+                            IsSuccess = true,
+                            Data = result,
+                            StatusCode = (int)response.StatusCode
+                        };
+                    }
+                    catch (JsonException)
+                    {
+                        // Игнорируем ошибку JSON - операция прошла успешно
+                        return new ApiResponse<T>
+                        {
+                            IsSuccess = true,
+                            Data = typeof(T) == typeof(bool) ? (T)(object)true : default,
+                            StatusCode = (int)response.StatusCode
+                        };
+                    }
                 }
                 else
                 {
